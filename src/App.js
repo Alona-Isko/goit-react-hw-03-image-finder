@@ -1,10 +1,23 @@
+import React, { Component } from 'react';
+import Searchbar from './components/Searchbar/Searchbar';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
+class App extends Component {
+  state = {
+    
+  }
+
+  handleFormSubmit = query => {
+  
+}
+
+  render() {
+    return (
+      <>
+        <Searchbar />
+      </>
+    )
+  }
 }
 
 export default App;
