@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { toast } from 'react-toastify';
 // import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import s from './Searchbar.module.css';
 
@@ -15,7 +16,7 @@ class Searchbar extends Component {
         e.preventDefault();
 
         if (this.state.query.trim() === '') {
-            alert('Your query is empty');
+            toast('Your query is empty');
             return;
         }
         
