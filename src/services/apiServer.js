@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// 
-
-// axios.defaults.baseURL = BASE_URL;
 
 export class ApiServer {
     constructor(BASE_URL, API_KEY) {
@@ -18,20 +15,26 @@ export class ApiServer {
         return (this._searchQuery = value);
     };
 
-    searchImages(API_KEY) {
+    searchImages() {
         axios.defaults.baseURL = this.BASE_URL;
 
-        let params = `/?q=${this.searchQuery}&page=${this.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
+        let params = `?q=${this.searchQuery}&page=${this.page}&key=${this.API_KEY}&image_type=photo&orientation=horizontal&per_page=12`;
 
-        axios.get(params)
+        return axios.get(params)
         .then(res => {
-            console.log(res);
+            // console.log(res);
+            return res.data;
+        })
+        .then(data => {
+            // console.log(data);
+            return data.hits;
         })
         .catch(error => {
             console.log(error);
         });
     }
 }
+
 
 // export function ApiServerFunc() {
 //     const BASE_URL = 'https://pixabay.com/api/';
