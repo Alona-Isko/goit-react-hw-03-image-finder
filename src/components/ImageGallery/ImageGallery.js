@@ -3,7 +3,7 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import s from './ImageGallery.module.css';
 
 
-export default function ImageGallery({ data }) {
+export default function ImageGallery({ data, onImageClick}) {
     return (
         <ul className={s.ImageGallery}>
             {data.map(image => {
@@ -11,6 +11,7 @@ export default function ImageGallery({ data }) {
                     <ImageGalleryItem
                         key={image.id}
                         image={image}
+                        onImageClick={onImageClick}
                     />
                 )
             })}

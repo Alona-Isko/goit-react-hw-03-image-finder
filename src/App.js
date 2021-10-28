@@ -6,6 +6,7 @@ import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import Button from './components/Button/Button';
 import fetchImages from './services/apiServer';
+import Modal from './components/Modal/Modal';
 import s from './App.module.css';
 
 
@@ -14,6 +15,8 @@ class App extends Component {
     query: '',
     page: 1,
     data: [],
+    showModal: false,
+    largeImageURL: '',
     loading: false,
   }
 
@@ -59,6 +62,21 @@ class App extends Component {
   };
 
 
+  openModalClick = largeImageURL => {
+    this.setState({
+      largeImageURL: largeImageURL,
+      showModal: true,
+    });
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+      largeImageURL: '',
+    }));
+  };
+
+
   render() {
     return (
       <div className={s.App}>
@@ -68,11 +86,18 @@ class App extends Component {
         />
         <ImageGallery
           data={this.state.data}
+          onImageClick={this.openModalClick}
         />
 
         {this.state.data.length > 0 && (
           <Button onClick={this.onLoadMore}/>
         )}
+
+        {this.state.showModal && (
+          <Modal
+            onClose={this.toggleModal}
+            largeImageURL={this.state.largeImageURL}
+          />)}
       </div>
     )
   }
