@@ -8,6 +8,7 @@ const fetchImages = (query = '', page = 1) => {
         .get(
         `/?q=${query}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`
     )
+    .then(x => new Promise(resolve => setTimeout(() => resolve(x), 1000)))   
     .then(res => res.data.hits);
 };
 

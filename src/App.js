@@ -7,6 +7,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import Button from './components/Button/Button';
 import fetchImages from './services/apiServer';
 import Modal from './components/Modal/Modal';
+import Loader from './components/Loader/Loader';
 import s from './App.module.css';
 
 
@@ -21,17 +22,14 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // console.log("prev query: ", prevState.query);
-    // console.log("new query: ", this.state.query);
-    // console.log(this.state.page);
     if (prevState.query !== this.state.query) {
       this.getFetch();
     }
   };
 
   getFetch = () => {
-    // this.setState({ loading: true });
     const { query, page } = this.state;
+    this.setState({ loading: true });
 
     return fetchImages(query, page)
       .then(data => {
@@ -42,9 +40,14 @@ class App extends Component {
         }));
       })
       .catch(error => this.setState({ error }))
+      .finally(() => this.setState({ loading: false }));
   };
 
-  getSearchValue = query => this.setState({ query });
+  getSearchValue = query => this.setState({
+    query,
+    page: 1,
+    data: [],
+  });
 
 
   onLoadMore = () => {
@@ -78,6 +81,7 @@ class App extends Component {
 
 
   render() {
+    const { data, loading, showModal, largeImageURL} = this.state;
     return (
       <div className={s.App}>
         <Searchbar getSearchValue={this.getSearchValue} />
@@ -85,18 +89,17 @@ class App extends Component {
           autoClose={3000}
         />
         <ImageGallery
-          data={this.state.data}
+          data={data}
           onImageClick={this.openModalClick}
         />
-
-        {this.state.data.length > 0 && (
+        {loading && <Loader />}
+        {data.length > 0 && data.length >= 12 && (
           <Button onClick={this.onLoadMore}/>
         )}
-
-        {this.state.showModal && (
+        {showModal && (
           <Modal
             onClose={this.toggleModal}
-            largeImageURL={this.state.largeImageURL}
+            largeImageURL={largeImageURL}
           />)}
       </div>
     )
