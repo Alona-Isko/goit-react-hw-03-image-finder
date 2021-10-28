@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { toast } from 'react-toastify';
-// import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import s from './Searchbar.module.css';
 
 

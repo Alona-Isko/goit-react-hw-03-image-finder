@@ -6,7 +6,7 @@ import Searchbar from './components/Searchbar/Searchbar';
 import ImageGallery from './components/ImageGallery/ImageGallery';
 import Button from './components/Button/Button';
 import fetchImages from './services/apiServer';
-import './App.css';
+import s from './App.module.css';
 
 
 class App extends Component {
@@ -20,6 +20,7 @@ class App extends Component {
   componentDidUpdate(prevProps, prevState) {
     // console.log("prev query: ", prevState.query);
     // console.log("new query: ", this.state.query);
+    // console.log(this.state.page);
     if (prevState.query !== this.state.query) {
       this.getFetch();
     }
@@ -60,7 +61,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className={s.App}>
         <Searchbar getSearchValue={this.getSearchValue} />
         <ToastContainer
           autoClose={3000}

@@ -1,6 +1,5 @@
 import React from 'react';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
-// import {ApiServer} from '../../services/apiServer';
 import s from './ImageGallery.module.css';
 
 
