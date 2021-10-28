@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 // import { ReactComponent as SearchIcon } from '../../images/search.svg';
 import s from './Searchbar.module.css';
 
+
 class Searchbar extends Component {
     state = {
         query: '',
@@ -16,8 +17,8 @@ class Searchbar extends Component {
             return;
         }
 
-        // this.setState({ query: '' });
         this.props.getSearchValue(this.state.query);
+        this.setState({ query: '' });
     };
 
     handleInputChange = e => {
